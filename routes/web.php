@@ -423,6 +423,7 @@ Route::get("/without-global-scope-posts-current-month", function () {
 
 /**
  * POSTS AGRUPADOS POR CATEGORÍA CON SUMA DE LIKES Y DISLIKES
+ * ESTA CONSULTA RETORNA TODAS LAS CATEGORIAS QUE TENGAN AL MENOS UN POST Y EL TOTAL DE LOS LIKES Y DISLIKES POR CATEGORIA
  */
 Route::get("/query-raw", function () {
     return Post::withoutGlobalScope("currentMonth")
