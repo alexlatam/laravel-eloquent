@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Models\Billing;
 use App\Models\Category;
 use App\Models\Post;
@@ -442,6 +443,8 @@ Route::get("/query-raw", function () {
 
 /**
  * POSTS AGRUPADOS POR CATEGORÍA CON SUMA DE LIKES Y DISLIKES QUE SUMEN MÁS DE 110 LIKES
+ * ESTA CONSULTA RETORNA TODAS LAS CATEGORIAS QUE TENGAN AL MENOS UN POST Y EL TOTAL DE LOS LIKES Y DISLIKES POR CATEGORIA
+ * Y ADICIONALMENTE FILTRA POR LA SUMA DE LIKES PARA RETORNAR SOLO LAS CATEGORIAS QUE TENGAN MÁS DE 110 LIKES
  */
 Route::get("/query-raw-having-raw", function () {
     return Post::withoutGlobalScope("currentMonth")
@@ -512,6 +515,7 @@ Route::get("/multiple-insert", function () {
 
 /**
  * INSERT BATCH
+ * INSERTAR 150 USUARIOS EN 2 CONSULTAS DE 100 REGISTROS CADA UNA
  */
 Route::get("/batch-insert", function () {
     $userInstance = new User;

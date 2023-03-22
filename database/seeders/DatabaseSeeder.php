@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         Post::factory(50)->create()->each(function (Post $post) {
             $numberOfTags = rand(0, 3);
             if ($numberOfTags) {
+                // Sincroniza los tags con el post usando la relacion tags del modelo Post. Relacion many to many
                 $post->tags()->sync(Tag::all()->random($numberOfTags)->pluck("id"));
             }
         });

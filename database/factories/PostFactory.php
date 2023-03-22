@@ -23,11 +23,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        // Crea una fecha aleatoria entre 1 y 20 días atrás
         $created_at = now()->subDays(rand(1, 20));
         $title = $this->faker->text(60);
         return [
-            "user_id" => User::all()->random(1)->first()->id,
-            "category_id" => Category::all()->random(1)->first()->id,
+            "user_id" => User::all()->random(1)->first()->id, // Id de un usuario aleatoriamente
+            "category_id" => Category::all()->random(1)->first()->id, // Id de una categoria aleatoriamente
             "title" => $title,
             "content" => $this->faker->text(400),
             "likes" => rand(1, 20),

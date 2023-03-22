@@ -35,6 +35,8 @@ class Post extends Model
         "user:id,name,email",
     ];*/
 
+    // El metodo booted se ejecuta despues de que se haya creado el modelo. Osea despues que se use el metodo Post
+    // Este metodo se ejecuta una sola vez. En este caso estamos creando un scope global que se ejecutara en todas las consultas Eloquent
     protected static function booted() {
         static::addGlobalScope("currentMonth", function (Builder $builder) {
             $builder->whereMonth("created_at", now()->month);
