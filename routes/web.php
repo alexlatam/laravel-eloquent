@@ -463,12 +463,14 @@ Route::get("/query-raw-having-raw", function () {
 });
 
 /**
- * USUARIOS ORDENADOS POR SU ÚLTIMO POST
+ * USUARIOS ORDENADOS POR SU ÚLTIMO POST.
+ * TODOS LOS USUARIOS QUE TENGAN UN POST, ORDENADOS DESDE EL USUARIO QUE HA CREADO EL POST MAS RECIENTE
  */
 Route::get("/order-by-subqueries", function () {
     return User::select(["id", "name"])
         ->has("posts")
         ->orderByDesc(
+            // Esta consulta obtiene el último post de cada usuario, especificamente la fecha de creación
             Post::withoutGlobalScope("currentMonth")
                 ->select("created_at")
                 ->whereColumn("user_id", "users.id")
@@ -480,6 +482,7 @@ Route::get("/order-by-subqueries", function () {
 
 /**
  * USUARIOS QUE TIENEN POSTS CON SU ÚLTIMO POST PUBLICADO
+ * OTIENE TODOS LOS USUARIOS QUE TENGAN UN POST, Y ADICIONALMENTE AGREGA EL TITULO DEL ULTIMO POST DE CADA USUARIO
  */
 Route::get("/select-subqueries", function () {
     return User::select(["id", "name"])

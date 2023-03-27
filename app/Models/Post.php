@@ -27,6 +27,7 @@ class Post extends Model
         "title_with_author"
     ];
 
+    // Indicamos que el campo created_at es de tipo datetime y que queremos que se retorne en formato Y-m-d
     protected $casts = [
         "created_at" => "datetime:Y-m-d"
     ];
