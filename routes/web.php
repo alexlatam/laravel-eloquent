@@ -19,6 +19,39 @@ Route::get("/find/{id}", function (int $id) {
 
 
 /**
+ * BUSCA UN POST POR SU ID O RETORNA UNA INSTANCIA VACIA DEL MODELO POST. NO PERSISTE DATA EN LA BD
+ */
+Route::get("/find-or-new/{id}", function (int $id) {
+    try {
+        return Post::findOrNew($id);
+    } catch (ModelNotFoundException $exception) {
+        return $exception->getMessage();
+    }
+});
+
+/**
+ * BUSCA EL PRIMER POST QUE CUMPLA UNA CONDICION. SINO, RETORNA UNA INSTANCIA DEL MODELO POST CON LOS VALORES DE LA CONDICION. NO PERSISTE DATA EN LA BD
+ */
+Route::get("/first-or-new/{title}", function (string $title) {
+    try {
+        return Post::firstOrNew(["title" => $title]);
+    } catch (ModelNotFoundException $exception) {
+        return $exception->getMessage();
+    }
+});
+
+/**
+ * BUSCA EL PRIMER POST QUE CUMPLA UNA CONDICION. SINO, RETORNA UNA INSTANCIA DEL MODELO POST, YA PERSISTIDO, CON LOS VALORES DE LA CONDICION. SI PERSISTE DATA EN LA BD
+ */
+Route::get("/first-or-create/{title}", function (string $title) {
+    try {
+        return Post::firstOrCreate(["title" => $title]);
+    } catch (ModelNotFoundException $exception) {
+        return $exception->getMessage();
+    }
+});
+
+/**
  * BUSCA UN POST POR SU ID O RETORNA UN 404
  */
 Route::get("/find-or-fail/{id}", function (int $id) {
